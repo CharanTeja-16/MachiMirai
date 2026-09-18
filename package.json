@@ -1,0 +1,24 @@
+{
+  "name": "machimirai",
+  "version": "1.0.0",
+  "description": "Japan Municipal Survival Intelligence Platform for Depopulating Towns",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --port 8000",
+    "build:frontend": "cd frontend && npm run build",
+    "test:backend": "cd backend && python -m pytest tests",
+    "test": "npm run test:backend"
+  },
+  "keywords": [
+    "govtech",
+    "japan",
+    "demographics",
+    "depopulation",
+    "smart-shrinkage",
+    "akiya",
+    "elderly-care"
+  ],
+  "author": "MachiMirai Team",
+  "license": "MIT"
+}

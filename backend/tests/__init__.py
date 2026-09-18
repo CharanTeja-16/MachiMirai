@@ -1,0 +1,1 @@
+"""MachiMirai Test Suite"""

@@ -86,7 +86,9 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
             <AlertCircle size={22} color="#ef4444" />
             <h2 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fecaca' }}>
-              【緊急警報】24時間無活動検知 — 孤独死未然防止プロトコル発令中 ({activeAlertsList.length}件)
+              {lang === 'en'
+                ? `[CRITICAL ALERT] 24-Hour Inactivity Detected — Solitary Death Prevention Protocol Active (${activeAlertsList.length} Case${activeAlertsList.length > 1 ? 's' : ''})`
+                : `【緊急警報】24時間無活動検知 — 孤独死未然防止プロトコル発令中 (${activeAlertsList.length}件)`}
             </h2>
           </div>
 
@@ -109,16 +111,18 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                     <span style={{ fontWeight: 800, fontSize: '0.95rem', color: '#f8fafc' }}>
                       {alert.resident_name}
                     </span>
-                    <span style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>({alert.age}歳)</span>
+                    <span style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
+                      ({alert.age}{lang === 'en' ? ' yrs' : '歳'})
+                    </span>
                     <span className="badge badge-red" style={{ fontSize: '0.65rem' }}>
-                      {alert.hours_silent}時間 無反応
+                      {alert.hours_silent}{lang === 'en' ? 'h Inactive' : '時間 無反応'}
                     </span>
                   </div>
                   <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.2rem' }}>
-                    住所: {alert.address}
+                    {lang === 'en' ? 'Address:' : '住所:'} {alert.address}
                   </div>
                   <div style={{ fontSize: '0.72rem', color: '#cbd5e1', marginTop: '0.2rem' }}>
-                    緊急連絡: {alert.emergency_contact}
+                    {lang === 'en' ? 'Emergency Contact:' : '緊急連絡:'} {alert.emergency_contact}
                   </div>
                 </div>
 
@@ -130,7 +134,7 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                   className="btn btn-danger btn-sm"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  駆けつけ記録
+                  {lang === 'en' ? 'Dispatch Check' : '駆けつけ記録'}
                 </button>
               </div>
             ))}
@@ -144,10 +148,10 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
         <div className="gov-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc' }}>
-              {t.registered_residents} ({residents.length}名)
+              {t.registered_residents} ({residents.length} {lang === 'en' ? 'Residents' : '名'})
             </h2>
             <span className="badge badge-indigo" style={{ fontSize: '0.7rem' }}>
-              SLA基準: 24時間以内検知
+              {lang === 'en' ? 'SLA: Detection < 24h' : 'SLA基準: 24時間以内検知'}
             </span>
           </div>
 
@@ -155,11 +159,11 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem', textAlign: 'left' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}>
-                  <th style={{ padding: '0.5rem' }}>氏名 / 年齢</th>
-                  <th style={{ padding: '0.5rem' }}>自立度</th>
-                  <th style={{ padding: '0.5rem', textAlign: 'center' }}>最終活動</th>
-                  <th style={{ padding: '0.5rem', textAlign: 'center' }}>リスク</th>
-                  <th style={{ padding: '0.5rem', textAlign: 'center' }}>操作</th>
+                  <th style={{ padding: '0.5rem' }}>{lang === 'en' ? 'Name / Age' : '氏名 / 年齢'}</th>
+                  <th style={{ padding: '0.5rem' }}>{lang === 'en' ? 'Mobility' : '自立度'}</th>
+                  <th style={{ padding: '0.5rem', textAlign: 'center' }}>{lang === 'en' ? 'Last Active' : '最終活動'}</th>
+                  <th style={{ padding: '0.5rem', textAlign: 'center' }}>{lang === 'en' ? 'Risk' : 'リスク'}</th>
+                  <th style={{ padding: '0.5rem', textAlign: 'center' }}>{lang === 'en' ? 'Action' : '操作'}</th>
                 </tr>
               </thead>
               <tbody>
@@ -168,6 +172,10 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                   const riskBadge = r.risk_level === 'critical' || isSilentAlert
                     ? 'badge-red'
                     : (r.risk_level === 'high' ? 'badge-amber' : 'badge-green');
+
+                  const mobilityText = r.mobility_level === 'independent'
+                    ? (lang === 'en' ? 'Independent' : '自立')
+                    : (r.mobility_level === 'assisted' ? (lang === 'en' ? 'Assisted' : '要支援') : (lang === 'en' ? 'Bedridden / Chair' : '車椅子/寝たきり'));
 
                   return (
                     <tr
@@ -179,17 +187,19 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                     >
                       <td style={{ padding: '0.5rem' }}>
                         <div style={{ fontWeight: 600, color: '#f8fafc' }}>{r.resident_name}</div>
-                        <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>{r.age}歳・{r.address}</div>
+                        <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>
+                          {r.age}{lang === 'en' ? ' yrs' : '歳'} • {r.address}
+                        </div>
                       </td>
                       <td style={{ padding: '0.5rem', color: '#cbd5e1' }}>
-                        {r.mobility_level === 'independent' ? '自立' : (r.mobility_level === 'assisted' ? '要支援' : '車椅子/寝たきり')}
+                        {mobilityText}
                       </td>
                       <td style={{ padding: '0.5rem', textAlign: 'center', fontFamily: 'JetBrains Mono', color: isSilentAlert ? '#f43f5e' : '#cbd5e1' }}>
-                        {r.hours_since_activity}時間前
+                        {r.hours_since_activity}{lang === 'en' ? 'h ago' : '時間前'}
                       </td>
                       <td style={{ padding: '0.5rem', textAlign: 'center' }}>
                         <span className={`badge ${riskBadge}`}>
-                          {isSilentAlert ? '要確認' : r.risk_level}
+                          {isSilentAlert ? (lang === 'en' ? 'Alert' : '要確認') : r.risk_level}
                         </span>
                       </td>
                       <td style={{ padding: '0.5rem', textAlign: 'center' }}>
@@ -198,7 +208,7 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                           className="btn btn-secondary btn-sm"
                           style={{ padding: '0.2rem 0.5rem', fontSize: '0.72rem' }}
                         >
-                          詳細
+                          {lang === 'en' ? 'Details' : '詳細'}
                         </button>
                       </td>
                     </tr>
@@ -217,27 +227,27 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                 <div>
                   <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <User color="#818cf8" size={20} />
-                    {selectedResident.resident_name} ({selectedResident.age}歳)
+                    {selectedResident.resident_name} ({selectedResident.age}{lang === 'en' ? ' yrs' : '歳'})
                   </h2>
                   <p style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                    住所: {selectedResident.address} | 担当民生委員: {selectedResident.assigned_volunteer || '未割当'}
+                    {lang === 'en' ? 'Address:' : '住所:'} {selectedResident.address} | {lang === 'en' ? 'Coordinator:' : '担当民生委員:'} {selectedResident.assigned_volunteer || (lang === 'en' ? 'Unassigned' : '未割当')}
                   </p>
                 </div>
                 <span className={`badge ${selectedResident.hours_since_activity >= 24 ? 'badge-red' : 'badge-green'}`}>
-                  {selectedResident.hours_since_activity >= 24 ? '24h無反応アラート' : '安否正常'}
+                  {selectedResident.hours_since_activity >= 24 ? (lang === 'en' ? '24h Inactivity Alert' : '24h無反応アラート') : (lang === 'en' ? 'Status Normal' : '安否正常')}
                 </span>
               </div>
 
               {/* Health conditions & Emergency Contact */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.6rem', fontSize: '0.75rem' }}>
                 <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <div style={{ color: '#94a3b8', marginBottom: '0.2rem' }}>既往症・健康リスク:</div>
+                  <div style={{ color: '#94a3b8', marginBottom: '0.2rem' }}>{lang === 'en' ? 'Health & Medical Conditions:' : '既往症・健康リスク:'}</div>
                   <div style={{ color: '#cbd5e1' }}>
-                    {selectedResident.health_conditions?.join(', ') || '特記事項なし'}
+                    {selectedResident.health_conditions?.join(', ') || (lang === 'en' ? 'None noted' : '特記事項なし')}
                   </div>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <div style={{ color: '#94a3b8', marginBottom: '0.2rem' }}>緊急連絡先 (家族・親族):</div>
+                  <div style={{ color: '#94a3b8', marginBottom: '0.2rem' }}>{lang === 'en' ? 'Emergency Contact:' : '緊急連絡先 (家族・親族):'}</div>
                   <div style={{ color: '#cbd5e1' }}>
                     {selectedResident.emergency_contact_name} ({selectedResident.emergency_contact_phone})
                   </div>
@@ -249,7 +259,7 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                 <div>
                   <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <Activity size={15} color="#38bdf8" />
-                    水道・電力スマートメーター直近活動推移 (IoT Telemetry):
+                    {lang === 'en' ? 'Smart Meter Activity Trend (IoT Telemetry):' : '水道・電力スマートメーター直近活動推移 (IoT Telemetry):'}
                   </div>
                   <div style={{ height: '140px', width: '100%', background: 'rgba(0,0,0,0.2)', borderRadius: '6px', padding: '0.4rem' }}>
                     <ResponsiveContainer width="100%" height="100%">
@@ -258,7 +268,7 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                         <XAxis dataKey="timestamp" stroke="#64748b" fontSize={9} />
                         <YAxis stroke="#64748b" fontSize={9} />
                         <Tooltip contentStyle={{ background: '#0e1424', border: '1px solid rgba(255,255,255,0.2)', fontSize: '11px' }} />
-                        <Line type="monotone" dataKey="value" name="測定値" stroke="#38bdf8" strokeWidth={2} dot={{ r: 3 }} />
+                        <Line type="monotone" dataKey="value" name={lang === 'en' ? 'Usage' : '測定値'} stroke="#38bdf8" strokeWidth={2} dot={{ r: 3 }} />
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
@@ -268,7 +278,7 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
               {/* Record Checkin Action Form */}
               <form onSubmit={handleCheckinSubmit} style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc' }}>
-                  {t.checkin_now} (見守り完了ログ記録):
+                  {t.checkin_now} {lang === 'en' ? '(Record Welfare Visit Log):' : '(見守り完了ログ記録):'}
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '0.5rem' }}>
                   <input
@@ -276,7 +286,7 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                     required
                     value={volunteerName}
                     onChange={(e) => setVolunteerName(e.target.value)}
-                    placeholder="確認者氏名"
+                    placeholder={lang === 'en' ? 'Coordinator Name' : '確認者氏名'}
                     style={{ background: 'rgba(255,255,255,0.05)', color: '#f8fafc', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '6px', padding: '0.35rem 0.5rem', fontSize: '0.75rem' }}
                   />
                   <input
@@ -284,7 +294,7 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                     required
                     value={checkinNotes}
                     onChange={(e) => setCheckinNotes(e.target.value)}
-                    placeholder="状況メモ・特記事項"
+                    placeholder={lang === 'en' ? 'Visit observations / status notes' : '状況メモ・特記事項'}
                     style={{ background: 'rgba(255,255,255,0.05)', color: '#f8fafc', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '6px', padding: '0.35rem 0.5rem', fontSize: '0.75rem' }}
                   />
                 </div>
@@ -294,13 +304,13 @@ export const ElderlyNetwork: React.FC<ElderlyProps> = ({
                   className="btn btn-primary btn-sm"
                   style={{ alignSelf: 'flex-end', marginTop: '0.2rem' }}
                 >
-                  {isSubmittingCheckin ? '記録中...' : '安否確認ログを登録（警報解除）'}
+                  {isSubmittingCheckin ? (lang === 'en' ? 'Recording...' : '記録中...') : (lang === 'en' ? 'Log Safety Check (Dismiss Alert)' : '安否確認ログを登録（警報解除）')}
                 </button>
               </form>
             </div>
           ) : (
             <div style={{ height: '350px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '0.85rem' }}>
-              左側の台帳から対象高齢者を選択してください。IoTセンサーログと見守り記録が表示されます。
+              {lang === 'en' ? 'Select an elderly resident from the registry to view IoT telemetry and check-in logs.' : '左側の台帳から対象高齢者を選択してください。IoTセンサーログと見守り記録が表示されます。'}
             </div>
           )}
         </div>

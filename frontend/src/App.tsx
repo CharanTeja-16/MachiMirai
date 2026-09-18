@@ -11,7 +11,7 @@ import { translations, type Language } from './i18n';
 import * as api from './api';
 
 export function App() {
-  const [lang, setLang] = useState<Language>('ja');
+  const [lang, setLang] = useState<Language>('en');
   const [currentTab, setCurrentTab] = useState<string>('demographics');
   const [currentRole, setCurrentRole] = useState<string>('mayor');
 

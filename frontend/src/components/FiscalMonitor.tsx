@@ -63,23 +63,27 @@ export const FiscalMonitor: React.FC<FiscalProps> = ({ data, lang }) => {
             </div>
             <div>
               <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fef3c7' }}>
-                {t.fiscal_cliff_alert}: {fiscal_cliff_year ? `${fiscal_cliff_year}年度` : '健全'}
+                {t.fiscal_cliff_alert}: {fiscal_cliff_year ? (lang === 'en' ? `FY${fiscal_cliff_year}` : `${fiscal_cliff_year}年度`) : (lang === 'en' ? 'Fiscal Stability Maintained' : '健全')}
               </h2>
               <p style={{ fontSize: '0.8rem', color: '#fde68a', marginTop: '0.15rem' }}>
-                現行の歳出水準を維持した場合、<strong style={{ color: '#ef4444' }}>あと {years_to_cliff} 年</strong> で経常収支が赤字へ転落します。
+                {lang === 'en' ? (
+                  <>At current spending rates, recurring operational balance enters an unmitigated deficit in <strong style={{ color: '#ef4444' }}>{years_to_cliff} years</strong>.</>
+                ) : (
+                  <>現行の歳出水準を維持した場合、<strong style={{ color: '#ef4444' }}>あと {years_to_cliff} 年</strong> で経常収支が赤字へ転落します。</>
+                )}
               </p>
             </div>
           </div>
 
           <div style={{ display: 'flex', gap: '1.5rem' }}>
             <div>
-              <div style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>20年間累積予測赤字</div>
+              <div style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>{lang === 'en' ? '20-Year Cumulative Deficit' : '20年間累積予測赤字'}</div>
               <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f87171', fontFamily: 'JetBrains Mono' }}>
-                ¥{(total_unmitigated_deficit_20yr_yen / 100000000).toFixed(1)} 億円
+                ¥{(total_unmitigated_deficit_20yr_yen / 100000000).toFixed(1)} {lang === 'en' ? 'Billion' : '億円'}
               </div>
             </div>
             <div>
-              <div style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>財政力指数</div>
+              <div style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>{lang === 'en' ? 'Financial Index' : '財政力指数'}</div>
               <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f59e0b', fontFamily: 'JetBrains Mono' }}>
                 {fiscal_independence_ratio}
               </div>
@@ -93,14 +97,14 @@ export const FiscalMonitor: React.FC<FiscalProps> = ({ data, lang }) => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
           <div>
             <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc' }}>
-              歳入・歳出の20年間推移と財政破綻交差ポイント（億円）
+              {lang === 'en' ? '20-Year Revenue vs. Expenditure Trajectory & Fiscal Cliff Point (¥100M)' : '歳入・歳出の20年間推移と財政破綻交差ポイント（億円）'}
             </h2>
             <p style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-              青実線（総歳入）が赤実線（総歳出）を下回るポイントが財政再建団体転落リスクゾーン
+              {lang === 'en' ? 'Where Blue line (Total Revenue) drops below Red line (Total Expenditure) indicates insolvency risk' : '青実線（総歳入）が赤実線（総歳出）を下回るポイントが財政再建団体転落リスクゾーン'}
             </p>
           </div>
           <span className="badge badge-amber">
-            2026年以降: 将来推計モデル
+            {lang === 'en' ? '2026+: Micro-simulation Forecast' : '2026年以降: 将来推計モデル'}
           </span>
         </div>
 
@@ -119,20 +123,29 @@ export const FiscalMonitor: React.FC<FiscalProps> = ({ data, lang }) => {
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
               <XAxis dataKey="year" stroke="#64748b" fontSize={11} />
-              <YAxis stroke="#64748b" fontSize={11} tickFormatter={(v) => `${v}億`} />
+              <YAxis stroke="#64748b" fontSize={11} tickFormatter={(v) => (lang === 'en' ? `¥${v}00M` : `${v}億`)} />
               <Tooltip
                 content={({ payload, label }) => {
                   if (!payload || !payload.length) return null;
                   const rev = payload.find(p => p.dataKey === 'totalRev')?.value;
                   const exp = payload.find(p => p.dataKey === 'totalExp')?.value;
                   const bal = (Number(rev) - Number(exp)).toFixed(2);
+                  const isPositive = Number(bal) >= 0;
                   return (
                     <div style={{ background: '#0e1424', border: '1px solid rgba(255,255,255,0.2)', padding: '0.5rem 0.75rem', borderRadius: '8px', fontSize: '0.75rem' }}>
-                      <div style={{ fontWeight: 700, color: '#f8fafc', marginBottom: '0.3rem' }}>{label}年度 財政収支</div>
-                      <div style={{ color: '#38bdf8' }}>総歳入: {rev} 億円</div>
-                      <div style={{ color: '#ef4444' }}>総歳出: {exp} 億円</div>
-                      <div style={{ color: Number(bal) >= 0 ? '#10b981' : '#f87171', fontWeight: 700, marginTop: '0.2rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '0.2rem' }}>
-                        単年度収支: {Number(bal) >= 0 ? `+${bal}` : bal} 億円
+                      <div style={{ fontWeight: 700, color: '#f8fafc', marginBottom: '0.3rem' }}>
+                        {lang === 'en' ? `FY${label} Fiscal Balance` : `${label}年度 財政収支`}
+                      </div>
+                      <div style={{ color: '#38bdf8' }}>
+                        {lang === 'en' ? `Total Revenue: ¥${rev}00M` : `総歳入: ${rev} 億円`}
+                      </div>
+                      <div style={{ color: '#ef4444' }}>
+                        {lang === 'en' ? `Total Expenditure: ¥${exp}00M` : `総歳出: ${exp} 億円`}
+                      </div>
+                      <div style={{ color: isPositive ? '#10b981' : '#f87171', fontWeight: 700, marginTop: '0.2rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '0.2rem' }}>
+                        {lang === 'en'
+                          ? `Annual Balance: ${isPositive ? `+¥${bal}00M` : `-¥${Math.abs(Number(bal))}00M`}`
+                          : `単年度収支: ${isPositive ? `+${bal}` : bal} 億円`}
                       </div>
                     </div>
                   );
@@ -143,10 +156,10 @@ export const FiscalMonitor: React.FC<FiscalProps> = ({ data, lang }) => {
                 height={30}
                 formatter={(val) => <span style={{ color: '#cbd5e1', fontSize: '0.75rem', marginRight: '1rem' }}>{val}</span>}
               />
-              <Area type="monotone" dataKey="totalRev" name="総歳入 (Revenue)" stroke="#38bdf8" strokeWidth={2.5} fillOpacity={1} fill="url(#colorRev)" />
-              <Area type="monotone" dataKey="totalExp" name="総歳出 (Expenditure)" stroke="#ef4444" strokeWidth={2.5} fillOpacity={1} fill="url(#colorExp)" />
-              <Line type="monotone" dataKey="welfareExp" name="社会保障・医療扶助" stroke="#f59e0b" strokeWidth={1.5} strokeDasharray="3 3" dot={false} />
-              <Line type="monotone" dataKey="taxRev" name="地方税収（独自財源）" stroke="#10b981" strokeWidth={1.5} dot={false} />
+              <Area type="monotone" dataKey="totalRev" name={lang === 'en' ? 'Total Revenue' : '総歳入 (Revenue)'} stroke="#38bdf8" strokeWidth={2.5} fillOpacity={1} fill="url(#colorRev)" />
+              <Area type="monotone" dataKey="totalExp" name={lang === 'en' ? 'Total Expenditure' : '総歳出 (Expenditure)'} stroke="#ef4444" strokeWidth={2.5} fillOpacity={1} fill="url(#colorExp)" />
+              <Line type="monotone" dataKey="welfareExp" name={lang === 'en' ? 'Social Security & Healthcare' : '社会保障・医療扶助'} stroke="#f59e0b" strokeWidth={1.5} strokeDasharray="3 3" dot={false} />
+              <Line type="monotone" dataKey="taxRev" name={lang === 'en' ? 'Local Tax (Own Source)' : '地方税収（独自財源）'} stroke="#10b981" strokeWidth={1.5} dot={false} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -157,7 +170,7 @@ export const FiscalMonitor: React.FC<FiscalProps> = ({ data, lang }) => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
           <BarChart3 size={18} color="#06b6d4" />
           <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc' }}>
-            {t.peer_benchmark} (全国類似過疎自治体比較)
+            {t.peer_benchmark} {lang === 'en' ? '(Depopulated Municipalities Benchmark)' : '(全国類似過疎自治体比較)'}
           </h2>
         </div>
 
@@ -165,11 +178,11 @@ export const FiscalMonitor: React.FC<FiscalProps> = ({ data, lang }) => {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', textAlign: 'left' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}>
-                <th style={{ padding: '0.6rem' }}>自治体名 (Prefecture)</th>
-                <th style={{ padding: '0.6rem', textAlign: 'right' }}>人口規模</th>
-                <th style={{ padding: '0.6rem', textAlign: 'right' }}>財政力指数</th>
-                <th style={{ padding: '0.6rem', textAlign: 'right' }}>交付税依存度</th>
-                <th style={{ padding: '0.6rem', textAlign: 'center' }}>財政破綻リスク分類</th>
+                <th style={{ padding: '0.6rem' }}>{lang === 'en' ? 'Municipality (Prefecture)' : '自治体名 (Prefecture)'}</th>
+                <th style={{ padding: '0.6rem', textAlign: 'right' }}>{lang === 'en' ? 'Population' : '人口規模'}</th>
+                <th style={{ padding: '0.6rem', textAlign: 'right' }}>{lang === 'en' ? 'Financial Index' : '財政力指数'}</th>
+                <th style={{ padding: '0.6rem', textAlign: 'right' }}>{lang === 'en' ? 'Grant Dependency' : '交付税依存度'}</th>
+                <th style={{ padding: '0.6rem', textAlign: 'center' }}>{lang === 'en' ? 'Fiscal Insolvency Risk' : '財政破綻リスク分類'}</th>
               </tr>
             </thead>
             <tbody>
@@ -178,13 +191,21 @@ export const FiscalMonitor: React.FC<FiscalProps> = ({ data, lang }) => {
                   ? 'badge-red'
                   : (p.risk === 'High' ? 'badge-amber' : 'badge-green');
 
+                const nameDisplay = lang === 'en'
+                  ? (p.name === '夕張市 (北海道)' ? 'Yubari (Hokkaido)' :
+                     p.name === '南阿蘇村 (熊本県)' ? 'Minamiaso (Kumamoto)' :
+                     p.name === '大豊町 (高知県)' ? 'Otoyo (Kochi)' :
+                     p.name === '神山町 (徳島県)' ? 'Kamiyama (Tokushima)' :
+                     p.name === '海士町 (島根県)' ? 'Ama (Shimane)' : p.name)
+                  : p.name;
+
                 return (
                   <tr key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
                     <td style={{ padding: '0.6rem', fontWeight: 600, color: '#f8fafc' }}>
-                      {p.name}
+                      {nameDisplay}
                     </td>
                     <td style={{ padding: '0.6rem', textAlign: 'right', fontFamily: 'JetBrains Mono' }}>
-                      {p.pop.toLocaleString()} 人
+                      {p.pop.toLocaleString()} {lang === 'en' ? '' : '人'}
                     </td>
                     <td style={{ padding: '0.6rem', textAlign: 'right', fontFamily: 'JetBrains Mono', color: p.fiscal_index < 0.3 ? '#ef4444' : '#f59e0b' }}>
                       {p.fiscal_index}

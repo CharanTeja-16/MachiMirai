@@ -55,11 +55,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             onChange={(e) => onMuniChange(e.target.value)}
             style={{ background: 'transparent', color: '#f8fafc', border: 'none', outline: 'none', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}
           >
-            {municipalities.map((m) => (
-              <option key={m.id} value={m.id} style={{ background: '#0e1424', color: '#f8fafc' }}>
-                {lang === 'ja' ? m.municipality_name : (m.municipality_name_en || m.municipality_name)} ({m.prefecture.split(' ')[0]})
-              </option>
-            ))}
+            {municipalities.map((m) => {
+              const prefName = lang === 'en' 
+                ? (m.prefecture.includes('(') ? m.prefecture.split('(')[1].replace(')', '') : m.prefecture)
+                : m.prefecture.split(' ')[0];
+              const townName = lang === 'en' ? (m.municipality_name_en || m.municipality_name) : m.municipality_name;
+              return (
+                <option key={m.id} value={m.id} style={{ background: '#0e1424', color: '#f8fafc' }}>
+                  {townName} ({prefName})
+                </option>
+              );
+            })}
           </select>
         </div>
       </div>
@@ -109,11 +115,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')}
           className="btn btn-secondary btn-sm"
-          style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontWeight: 600 }}
           title="Switch Language / 言語切替"
         >
           <Globe size={14} />
-          <span>{lang === 'ja' ? 'EN' : '日本語'}</span>
+          <span>{lang === 'ja' ? 'English (EN)' : '日本語 (JA)'}</span>
         </button>
       </div>
     </header>

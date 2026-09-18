@@ -82,14 +82,22 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
         fillOpacity: 0.85
       }).addTo(map);
 
+      const ageLabel = lang === 'en' ? `Age: ${ak.building_age_years} yrs` : `築${ak.building_age_years}年`;
+      const conditionLabel = lang === 'en' ? 'Condition' : '状態';
+      const riskLabel = lang === 'en' ? 'Risk Score' : '総合リスク';
+      const actionLabel = lang === 'en' ? 'Action' : '推奨アクション';
+      const ownerLabel = lang === 'en' ? 'Owner Status' : '所有者状況';
+      const costLabel = lang === 'en' ? 'Est. Demolition' : '推定解体費';
+      const costUnit = lang === 'en' ? 'M' : '万円';
+
       marker.bindPopup(`
         <div style="font-family: sans-serif; font-size: 12px; color: #f8fafc; padding: 4px; max-width: 220px;">
           <strong style="color: #60a5fa;">${ak.address}</strong><br/>
-          築年数: 築${ak.building_age_years}年 (${ak.floor_area_sqm}㎡)<br/>
-          状態: <strong>${ak.condition}</strong> (総合リスク: ${ak.risk_score}点)<br/>
-          推奨アクション: <span style="color: #38bdf8;">${ak.proposed_action}</span><br/>
-          所有者状況: <strong>${ak.owner_status}</strong><br/>
-          推定解体費: ¥${(ak.estimated_demolition_cost_yen/10000).toLocaleString()} 万円
+          ${ageLabel} (${ak.floor_area_sqm}㎡)<br/>
+          ${conditionLabel}: <strong>${ak.condition}</strong> (${riskLabel}: ${ak.risk_score})<br/>
+          ${actionLabel}: <span style="color: #38bdf8;">${ak.proposed_action}</span><br/>
+          ${ownerLabel}: <strong>${ak.owner_status}</strong><br/>
+          ${costLabel}: ¥${(ak.estimated_demolition_cost_yen/10000).toLocaleString()} ${costUnit}
         </div>
       `);
     });
@@ -100,7 +108,7 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
       map.remove();
       mapInstanceRef.current = null;
     };
-  }, [filteredAkiya]);
+  }, [filteredAkiya, lang]);
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -160,7 +168,7 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
         <div className="gov-card" style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc' }}>
-              空き家分布・危険度判定GISマップ
+              {lang === 'en' ? 'Akiya Distribution & Hazard Level GIS Map' : '空き家分布・危険度判定GISマップ'}
             </h2>
 
             {/* Filter Pills */}
@@ -201,19 +209,21 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
               <Hammer size={18} color="#ef4444" />
               <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc' }}>
-                {t.demolition_optimizer} (解体助成予算最適配分)
+                {t.demolition_optimizer} {lang === 'en' ? '(Demolition Subsidy Allocation)' : '(解体助成予算最適配分)'}
               </h2>
             </div>
             <p style={{ fontSize: '0.75rem', color: '#94a3b8', marginBottom: '1rem' }}>
-              特定空家（倒壊・火災リスク危険度）と解体費用を数理最適化し、予算内で最大のリスク低減効果を得られる優先順位を自動算出。
+              {lang === 'en'
+                ? 'Mathematical knapsack optimization prioritizing severe hazard properties (collapse/fire risks) to maximize town safety within municipal subsidy budget.'
+                : '特定空家（倒壊・火災リスク危険度）と解体費用を数理最適化し、予算内で最大のリスク低減効果を得られる優先順位を自動算出。'}
             </p>
 
             {/* Budget Slider */}
             <div style={{ background: 'rgba(0,0,0,0.25)', padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', fontWeight: 600, color: '#f8fafc', marginBottom: '0.4rem' }}>
-                <span>自治体解体補助予算枠:</span>
+                <span>{lang === 'en' ? 'Municipal Subsidy Budget Cap:' : '自治体解体補助予算枠:'}</span>
                 <span style={{ color: '#38bdf8', fontFamily: 'JetBrains Mono' }}>
-                  ¥{(budgetSliderVal / 10000).toLocaleString()} 万円
+                  ¥{(budgetSliderVal / 10000).toLocaleString()} {lang === 'en' ? 'M' : '万円'}
                 </span>
               </div>
               <input
@@ -235,21 +245,21 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
             {priorities && (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', textAlign: 'center', marginBottom: '1rem' }}>
                 <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>予算採択可能物件</div>
+                  <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>{lang === 'en' ? 'Eligible Funded' : '予算採択可能物件'}</div>
                   <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#10b981', fontFamily: 'JetBrains Mono' }}>
-                    {priorities.properties_funded_within_budget} / {priorities.total_dangerous_properties} 棟
+                    {priorities.properties_funded_within_budget} / {priorities.total_dangerous_properties} {lang === 'en' ? 'units' : '棟'}
                   </div>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>配分済み解体総額</div>
+                  <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>{lang === 'en' ? 'Allocated Cost' : '配分済み解体総額'}</div>
                   <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', fontFamily: 'JetBrains Mono' }}>
-                    ¥{(priorities.total_cost_allocated_yen / 10000).toLocaleString()}万
+                    ¥{(priorities.total_cost_allocated_yen / 10000).toLocaleString()}{lang === 'en' ? 'M' : '万'}
                   </div>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>予算残額</div>
+                  <div style={{ fontSize: '0.68rem', color: '#94a3b8' }}>{lang === 'en' ? 'Budget Remaining' : '予算残額'}</div>
                   <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#38bdf8', fontFamily: 'JetBrains Mono' }}>
-                    ¥{(priorities.budget_remaining_yen / 10000).toLocaleString()}万
+                    ¥{(priorities.budget_remaining_yen / 10000).toLocaleString()}{lang === 'en' ? 'M' : '万'}
                   </div>
                 </div>
               </div>
@@ -281,10 +291,14 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
                     <span style={{ color: '#f8fafc', fontWeight: 500 }}>{p.address}</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <span style={{ color: '#f87171', fontWeight: 700 }}>リスク {p.risk_score}点</span>
-                    <span style={{ fontFamily: 'JetBrains Mono', color: '#cbd5e1' }}>¥{(p.estimated_demolition_cost_yen / 10000).toLocaleString()}万</span>
+                    <span style={{ color: '#f87171', fontWeight: 700 }}>
+                      {lang === 'en' ? `Risk ${p.risk_score} pts` : `リスク ${p.risk_score}点`}
+                    </span>
+                    <span style={{ fontFamily: 'JetBrains Mono', color: '#cbd5e1' }}>
+                      ¥{(p.estimated_demolition_cost_yen / 10000).toLocaleString()}{lang === 'en' ? 'M' : '万'}
+                    </span>
                     <span className={`badge ${isFunded ? 'badge-red' : 'badge-amber'}`} style={{ fontSize: '0.65rem' }}>
-                      {isFunded ? '採択' : '次期繰延'}
+                      {isFunded ? (lang === 'en' ? 'Funded' : '採択') : (lang === 'en' ? 'Deferred' : '次期繰延')}
                     </span>
                   </div>
                 </div>
@@ -297,7 +311,7 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
       {/* Row 2: Property Cards & Owner Outreach Board */}
       <div className="gov-card">
         <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', marginBottom: '1rem' }}>
-          空き家一覧・所有者交渉状況 & AI利活用提案
+          {lang === 'en' ? 'Akiya Registry, Owner Negotiations & AI Action Recommendations' : '空き家一覧・所有者交渉状況 & AI利活用提案'}
         </h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
@@ -323,10 +337,10 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                   <div style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(0,0,0,0.7)', padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700, color: riskColor, border: `1px solid ${riskColor}` }}>
-                    総合リスク: {ak.risk_score}点
+                    {lang === 'en' ? `Risk: ${ak.risk_score} pts` : `総合リスク: ${ak.risk_score}点`}
                   </div>
                   <div style={{ position: 'absolute', bottom: '8px', left: '8px', background: 'rgba(0,0,0,0.7)', padding: '0.15rem 0.4rem', borderRadius: '4px', fontSize: '0.7rem', color: '#f8fafc' }}>
-                    築{ak.building_age_years}年 ({ak.floor_area_sqm}㎡)
+                    {lang === 'en' ? `Age ${ak.building_age_years} yrs (${ak.floor_area_sqm}㎡)` : `築${ak.building_age_years}年 (${ak.floor_area_sqm}㎡)`}
                   </div>
                 </div>
 
@@ -336,39 +350,41 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
                     <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc' }}>{ak.address}</h3>
                     <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.4rem', flexWrap: 'wrap' }}>
                       <span className="badge badge-indigo" style={{ fontSize: '0.68rem' }}>
-                        AI提案: {ak.proposed_action === 'demolition' ? '優先解体・更地化' : (ak.proposed_action === 'renovation' ? '古民家移住リノベ' : 'コワーキング/地域共創')}
+                        {lang === 'en'
+                          ? `AI: ${ak.proposed_action === 'demolition' ? 'Demolition & Land Clearance' : (ak.proposed_action === 'renovation' ? 'Traditional Folk-House Renovation' : 'Coworking / Community Hub')}`
+                          : `AI提案: ${ak.proposed_action === 'demolition' ? '優先解体・更地化' : (ak.proposed_action === 'renovation' ? '古民家移住リノベ' : 'コワーキング/地域共創')}`}
                       </span>
                       <span className="badge badge-amber" style={{ fontSize: '0.68rem' }}>
-                        状態: {ak.condition}
+                        {lang === 'en' ? `Condition: ${ak.condition}` : `状態: ${ak.condition}`}
                       </span>
                     </div>
 
                     {/* Sub-risks */}
                     <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.6rem', fontSize: '0.7rem', color: '#94a3b8' }}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                        <Flame size={13} color="#f87171" /> 火災: {ak.fire_risk}
+                        <Flame size={13} color="#f87171" /> {lang === 'en' ? 'Fire' : '火災'}: {ak.fire_risk}
                       </span>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                        <AlertTriangle size={13} color="#fbbf24" /> 倒壊: {ak.collapse_risk}
+                        <AlertTriangle size={13} color="#fbbf24" /> {lang === 'en' ? 'Collapse' : '倒壊'}: {ak.collapse_risk}
                       </span>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                        <Bug size={13} color="#a3e635" /> 害獣: {ak.pest_risk}
+                        <Bug size={13} color="#a3e635" /> {lang === 'en' ? 'Pest' : '害獣'}: {ak.pest_risk}
                       </span>
                     </div>
                   </div>
 
                   {/* Owner Status Selector */}
                   <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.6rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>所有者対応:</span>
+                    <span style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>{lang === 'en' ? 'Owner Outreach:' : '所有者対応:'}</span>
                     <select
                       value={ak.owner_status}
                       onChange={(e) => onStatusUpdate(ak.id, { owner_status: e.target.value, owner_contacted: true })}
                       style={{ background: '#0e1424', color: '#f8fafc', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '4px', fontSize: '0.72rem', padding: '0.2rem 0.4rem' }}
                     >
-                      <option value="uncontacted">未連絡 (Uncontacted)</option>
-                      <option value="negotiating">交渉中 (Negotiating)</option>
-                      <option value="agreement_reached">合意成立 (Agreed)</option>
-                      <option value="unresponsive">応答なし (Unresponsive)</option>
+                      <option value="uncontacted">{lang === 'en' ? 'Uncontacted' : '未連絡 (Uncontacted)'}</option>
+                      <option value="negotiating">{lang === 'en' ? 'Negotiating' : '交渉中 (Negotiating)'}</option>
+                      <option value="agreement_reached">{lang === 'en' ? 'Agreement Reached' : '合意成立 (Agreed)'}</option>
+                      <option value="unresponsive">{lang === 'en' ? 'Unresponsive' : '応答なし (Unresponsive)'}</option>
                     </select>
                   </div>
                 </div>
@@ -383,15 +399,15 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: '1rem' }}>
           <div className="gov-card" style={{ maxWidth: '500px', width: '100%', background: '#0e1424', border: '1px solid rgba(255,255,255,0.2)' }}>
             <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f8fafc', marginBottom: '1rem' }}>
-              新規空き家物件登録 (GIS・リスク台帳)
+              {lang === 'en' ? 'Register New Vacant Property (GIS Registry)' : '新規空き家物件登録 (GIS・リスク台帳)'}
             </h2>
             <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div>
-                <label style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>所在地・住所:</label>
+                <label style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>{lang === 'en' ? 'Address / Location:' : '所在地・住所:'}</label>
                 <input
                   type="text"
                   required
-                  placeholder="例: 南阿蘇村久石120番地"
+                  placeholder={lang === 'en' ? 'e.g., 120 Hisaishi, Minamiaso' : '例: 南阿蘇村久石120番地'}
                   value={newAddress}
                   onChange={(e) => setNewAddress(e.target.value)}
                   style={{ width: '100%', background: 'rgba(255,255,255,0.05)', color: '#f8fafc', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '6px', padding: '0.4rem', fontSize: '0.8rem', marginTop: '0.2rem' }}
@@ -400,20 +416,20 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>物件状態:</label>
+                  <label style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>{lang === 'en' ? 'Condition:' : '物件状態:'}</label>
                   <select
                     value={newCondition}
                     onChange={(e) => setNewCondition(e.target.value)}
                     style={{ width: '100%', background: '#0e1424', color: '#f8fafc', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '6px', padding: '0.4rem', fontSize: '0.8rem', marginTop: '0.2rem' }}
                   >
-                    <option value="habitable">居住可能 (Habitable)</option>
-                    <option value="needs_repair">要修繕 (Needs repair)</option>
-                    <option value="dangerous">危険 (Dangerous)</option>
-                    <option value="ruins">倒壊・廃屋 (Ruins)</option>
+                    <option value="habitable">{lang === 'en' ? 'Habitable' : '居住可能 (Habitable)'}</option>
+                    <option value="needs_repair">{lang === 'en' ? 'Needs Repair' : '要修繕 (Needs repair)'}</option>
+                    <option value="dangerous">{lang === 'en' ? 'Dangerous' : '危険 (Dangerous)'}</option>
+                    <option value="ruins">{lang === 'en' ? 'Ruins / Collapsing' : '倒壊・廃屋 (Ruins)'}</option>
                   </select>
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>築年数 (年):</label>
+                  <label style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>{lang === 'en' ? 'Building Age (Years):' : '築年数 (年):'}</label>
                   <input
                     type="number"
                     value={newBuildingAge}
@@ -425,7 +441,7 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.7rem', color: '#f87171' }}>火災リスク (0-100):</label>
+                  <label style={{ fontSize: '0.7rem', color: '#f87171' }}>{lang === 'en' ? 'Fire Risk (0-100):' : '火災リスク (0-100):'}</label>
                   <input
                     type="number"
                     value={newFireRisk}
@@ -434,7 +450,7 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.7rem', color: '#fbbf24' }}>倒壊リスク (0-100):</label>
+                  <label style={{ fontSize: '0.7rem', color: '#fbbf24' }}>{lang === 'en' ? 'Collapse Risk (0-100):' : '倒壊リスク (0-100):'}</label>
                   <input
                     type="number"
                     value={newCollapseRisk}
@@ -443,7 +459,7 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.7rem', color: '#a3e635' }}>害獣リスク (0-100):</label>
+                  <label style={{ fontSize: '0.7rem', color: '#a3e635' }}>{lang === 'en' ? 'Pest Hazard (0-100):' : '害獣リスク (0-100):'}</label>
                   <input
                     type="number"
                     value={newPestRisk}
@@ -459,13 +475,13 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
                   onClick={() => setShowRegisterModal(false)}
                   className="btn btn-secondary btn-sm"
                 >
-                  キャンセル
+                  {lang === 'en' ? 'Cancel' : 'キャンセル'}
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary btn-sm"
                 >
-                  登録完了
+                  {lang === 'en' ? 'Register Property' : '登録完了'}
                 </button>
               </div>
             </form>
@@ -475,3 +491,4 @@ export const AkiyaManager: React.FC<AkiyaProps> = ({
     </div>
   );
 };
+

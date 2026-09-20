@@ -1,37 +1,27 @@
+# MachiMirai (まちミライ) — Japan Municipal Survival Intelligence Platform
+
 <div align="center">
-
-# MachiMirai (まちミライ)
-### Japan Municipal Survival Intelligence & Demographic Decision Platform
-#### 自治体存続インテリジェンス・意思決定プラットフォーム
-
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![Python](https://img.shields.io/badge/Python-3.11+-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
-[![React](https://img.shields.io/badge/React-19.2+-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8+-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Vite](https://img.shields.io/badge/Vite-8.3+-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
-[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0+-D71F00.svg?style=for-the-badge&logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org)
-[![Tests](https://img.shields.io/badge/Tests-11%2F11%20Passing-success.svg?style=for-the-badge&logo=pytest&logoColor=white)](https://pytest.org)
-[![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=for-the-badge&logo=githubactions&logoColor=white)](#-verification--testing)
-[![Compliance](https://img.shields.io/badge/Compliance-MIC%20%26%20Society%205.0-blueviolet.svg?style=for-the-badge)](#-security-privacy--rbac-governance)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
-
-<br />
-
-<p align="center">
-  <b>A mission-critical GovTech decision-support and demographic forecasting platform engineered for Japan's 477+ depopulating municipalities (市町村) and prefectural planning bureaus facing irreversible demographic contraction.</b>
-</p>
-
-<p align="center">
-  <i>Empowering mayors, urban planners, and welfare commissioners with algorithmic "smart shrinkage" (スマート・シュリンク), infrastructure consolidation modeling, fiscal cliff early warnings, akiya hazard mitigation, and IoT-driven isolated elderly safety networks.</i>
-</p>
-
-<br />
 
 ![MachiMirai Platform Overview](docs/images/01_demographic_intelligence.png)
 
-<br />
+### *Enterprise GovTech Decision-Support & Demographic Forecasting System for Depopulating Towns*
+#### 自治体存続インテリジェンス・意思決定プラットフォーム
 
-[Live Interface Showcase](#-live-application-showcase) • [Key Capabilities](#-core-capabilities) • [System Architecture](#-system-architecture) • [Mathematical Models](#-demographic-forecasting-engine) • [Code Highlights](#-code-highlights) • [Municipal Data](#-pre-seeded-municipalities) • [REST API](#-api-reference) • [Quickstart](#-quickstart-guide) • [Security & RBAC](#-security-privacy--rbac-governance)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org)
+[![React](https://img.shields.io/badge/React-19.x-61DAFB.svg?logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-8.x-646CFF.svg?logo=vite&logoColor=white)](https://vitejs.dev)
+[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0+-D71F00.svg?logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org)
+[![Tests](https://img.shields.io/badge/Tests-11%2F11%20Passing-success.svg?logo=pytest&logoColor=white)](https://pytest.org)
+[![GovTech](https://img.shields.io/badge/GovTech-Society%205.0%20%7C%20MIC-blueviolet.svg)](#-executive-summary--problem-landscape)
+
+<p align="center">
+  <b>A mission-critical civic intelligence platform engineered for Japan's 477+ depopulating municipalities (市町村) and prefectural planning bureaus facing irreversible demographic decline.</b>
+</p>
+
+[Key Features](#-key-features) • [System Architecture](#-system-architecture) • [Visual Showcase](#-visual-showcase) • [Core Code Highlights](#-core-code-highlights) • [Municipal Data](#-pre-seeded-municipalities) • [Quickstart Guide](#-quickstart-guide) • [API Specification](#-api-specification)
 
 ---
 
@@ -39,16 +29,16 @@
 
 ## 📌 Executive Summary & Problem Landscape
 
-### Japan's Existential Demographic Reality
+### Japan's Existential Demographic Crisis
 
-Japan is experiencing the most acute demographic contraction in modern industrial history. By January 2026, the national population breached the psychological threshold below **119.74 million** (the first time under 120M in 42 years), with annual births dropping to a historic nadir of **~705,000** against more than **1.58 million** annual deaths. 
+Japan is confronting the most acute demographic contraction in modern industrial history. By 2026, the national population dropped below **119.74 million** (the first time under 120M in 42 years), with annual births hitting an all-time low of **~705,000** against more than **1.58 million** deaths. 
 
-Over **30%** of Japan's population is 65 or older, and more than **477 municipalities** (one in four across the archipelago) have lost greater than 10% of their residents in just five years.
+Over **30%** of Japan's population is 65 or older, and **477 municipalities** (one in four nationwide) have suffered population declines exceeding 10% in just five years.
 
-| Macro Demographic Metric | Official Value | Benchmark Agency / Source |
+| Macro Demographic Metric | Value | Benchmark Agency / Source |
 |:---|:---:|:---|
-| **Total National Population (2026)** | **119.74 Million** | Ministry of Internal Affairs & Communications (総務省) |
-| **Annual Registered Births** | **~705,809** | Ministry of Health, Labour and Welfare (厚生労働省) |
+| **Total National Population (2026)** | **119.74 Million** | Ministry of Internal Affairs & Communications (MIC / 総務省) |
+| **Annual Registered Births** | **~705,809** | Ministry of Health, Labour and Welfare (MHLW / 厚生労働省) |
 | **Annual Registered Deaths** | **~1,580,000+** | MHLW Vital Statistics (人口動態統計) |
 | **Senior Population Ratio ($\ge 65$)** | **30.1%** | Cabinet Office Aging Society White Paper (高齢社会白書) |
 | **Median National Age** | **50.2 Years** | United Nations Population Division |
@@ -56,220 +46,155 @@ Over **30%** of Japan's population is 65 or older, and more than **477 municipal
 | **Projected Population by 2060** | **~87.0 Million (-31%)** | NIPSSR Projections (国立社会保障・人口問題研究所) |
 | **Total Fertility Rate (TFR)** | **1.20** | Replacement threshold requires 2.07 |
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                        UNMANAGED CONTRACTION vs. SMART SHRINKAGE                       │
-├─────────────────────────────────────────┬──────────────────────────────────────────────┤
-│ ❌ STATUS QUO: POLITICAL PARALYSIS       │ ✅ MACHIMIRAI: ALGORITHMIC SMART SHRINKAGE   │
-├─────────────────────────────────────────┼──────────────────────────────────────────────┤
-│ • Elementary schools with 3 students    │ • Data-backed facility consolidation roadmap │
-│   cost ¥80M/yr to keep open             │   with travel time & budget tradeoff models  │
-│ • Uncontrolled fiscal cliff crossover   │ • 10-year advance notice before reaching     │
-│   (Financial Rehabilitation status)     │   Insolvency Designation (財政再生団体)       │
-│ • 9,000,000+ abandoned homes (Akiya)   │ • Multi-hazard scoring (collapse, fire, pest)│
-│   collapsing into road networks         │   and AI repurposing optimization            │
-│ • Isolated elderly discovered days      │ • 24-hour smart meter & sensor telemetry     │
-│   after solitary death (孤独死)          │   radar alerting local welfare commissioners │
-└─────────────────────────────────────────┴──────────────────────────────────────────────┘
-```
+---
 
-**MachiMirai (まちミライ)** directly addresses this operational void. Aligned with Japan's **Digital Garden City Nation Initiative (デジタル田園都市国家構想)**, **Society 5.0**, and **Regional Revitalization 2.0 (地方創生2.0)**, MachiMirai transforms disparate demographic, geospatial, fiscal, and welfare data silos into an actionable civic command center.
+## 🎯 Value Delivered
+
+| Operational Domain | Status Quo (Unmanaged Decline) | With MachiMirai | Civic & Fiscal Impact |
+|:---|:---|:---|:---|
+| **Infrastructure Planning** | Elementary schools with 3 students cost ¥80M/yr; uncoordinated closures | **What-if consolidation simulator** modeling travel times, ¥ savings, and medical envelopes | **15–25% recurring maintenance savings** identified |
+| **Fiscal Governance** | Surprise fiscal insolvency (*Financial Rehabilitation Designation* / 財政再生団体) | **20-year balance sheet simulation** with exact insolvency cliff crossover detection | **5–10 years advance warning** before bankruptcy |
+| **Akiya (Empty House) Risk** | 9M+ abandoned homes decaying into public hazards without prioritization | **Multi-hazard composite scoring** (collapse, fire, pest) and AI repurposing matching | **100% hazard-evaluated property registry** |
+| **Elderly Isolation** | 6.8M+ seniors living alone; emergencies found days later (*kodokushi* / 孤独死) | **24-hour IoT inactivity anomaly radar** (smart water & electricity meters) | **Zero undetected emergencies > 24 hours** |
+| **Regional Migration** | Trial-and-error marketing and untracked public subsidy spending | **7-pillar attractiveness radar** and net present return solver for relocation stipends | **Quantified per-yen return** on public incentive funds |
 
 ---
 
-## 📸 Live Application Showcase
+## ✨ Key Features
 
-All images below are live screenshots captured directly from the running MachiMirai application runtime.
+### 1. Demographic Intelligence & NIPSSR Cohort-Component Engine
+- **Single-Year Cohort Modeling**: Projects 101 single-year age cohorts ($0$ to $100+$) using MHLW Complete Life Table survival probabilities ($S_a$), Age-Specific Fertility Rates ($f_a$), and rural migration curves ($M_a$).
+- **Dynamic Age-Sex Pyramid**: Interactive Recharts visualization comparing 2026 baseline distributions against 2036, 2046, and 2056 forecasts with dependency ratios.
+- **Municipal Survival Countdown**: Algorithmic countdown computing the exact calendar year when total population falls below critical municipal service thresholds ($10{,}000$, $7{,}500$, $5{,}000$, $3{,}000$, $1{,}000$ residents).
+- **Sub-Municipal (町丁・字) Breakdown**: Micro-district tracking of vital rates, aging ratios, and depopulation risk tags.
 
-### 1. Demographic Intelligence & NIPSSR Cohort Model
-> *Real-time cohort simulation across 101 single-year age cohorts, comparative 2026–2056 population pyramids, and municipal viability countdown timers.*
+### 2. Smart Shrinkage & Facility Consolidation Planner
+- **GIS Public Facility Inventory**: Comprehensive tracking of elementary schools, secondary schools, clinics, community centers, and water treatment plants with structural age and annual maintenance overhead.
+- **Consolidation What-If Scenario Simulator**: Simulates annual municipal budget savings ($\yen$), student commute deltas, and healthcare access when facilities are consolidated.
+- **Compact City Zonation**: Categorizes neighborhoods into *Maintain Core Services (維持)*, *Gradual Consolidation (統合)*, and *Retire & Rewild (集約・撤退)*.
+- **30-Minute Emergency Medical Envelope**: Geospatial boundary validation ensuring $\ge 95\%$ of remaining rural citizens retain emergency medical transit within 30 minutes.
+
+### 3. 20-Year Fiscal Sustainability Monitor
+- **Dual-Stream Balance Sheet Forecast**: Models tax revenue collapse (resident, fixed asset, corporate) vs. rising social welfare and infrastructure maintenance.
+- **Fiscal Cliff Early Warning**: Detects the exact projected year of municipal insolvency (*Financial Rehabilitation Designation*) up to 10 years in advance.
+- **Grant Dependency Index**: Tracks municipal reliance on National Treasury Allocations (*地方交付税交付金*) and ranks fiscal strength indices (財政力指数) against peer towns.
+
+### 4. Akiya (Empty House) Manager
+- **Geospatial Hazard Mapping**: Vacant property catalog evaluated under Japan's **Revised Akiya Special Measures Act (改正空家等対策特別措置法)**.
+- **Multi-Hazard Scoring**: Composite danger score combining structural collapse, wildfire risk, and pest infestation ($0-100$).
+- **AI-Guided Repurposing**: Strategic recommendations: *Satellite Telework Office*, *Community Daycare / Cafe*, *Licensed Minpaku (民泊)*, or *Mandatory Demolition (代執行)*.
+- **Knapsack Demolition Allocator**: Optimizes municipal demolition subsidy allocations against public safety risk.
+
+### 5. Elderly Welfare Network
+- **Isolated Senior Registry**: Directory tracking single-occupant seniors ($\ge 75$ years), mobility grades (A/B/C), chronic conditions, and emergency contacts.
+- **24-Hour IoT Inactivity Anomaly Radar**: Real-time passive telemetry (smart water meter flow, electrical load, motion beacons) to prevent *kodokushi* (孤独死).
+- **Community Check-In Logger**: Mobile field log for welfare commissioners (民生委員), post office couriers, and volunteer patrols.
+
+### 6. Migration Attraction Toolkit
+- **7-Pillar Attractiveness Radar**: Benchmarking across *Environment*, *Housing*, *Childcare*, *Fiber/5G*, *Healthcare*, *Jobs*, and *Transit*.
+- **Revitalization Subsidy ROI Simulator**: Computes net present return on public relocation grants (e.g. $\yen 50\text{M}$ grant $\rightarrow$ projected children enrolled $\rightarrow$ 10-year municipal tax yield).
+- **National Case Study Repository**: Proven playbooks from pioneer towns (Kamiyama fiber hub, Sabae open-data cluster, Ama-cho educational revival).
+
+### 7. Multi-Persona Governance & Bilingual Localization
+- **Instant Persona Switcher**: Tailors operational views for four civic stakeholders:
+  - 🏛️ **Mayor Tanaka (南阿蘇村 村長)**: Executive summary, fiscal solvency, consolidation trade-offs.
+  - 📊 **Planner Yamamoto (秋田県 企画官)**: Multi-town benchmarking, macro indicators, prefectural grants.
+  - 🩺 **Coordinator Suzuki (福祉課・民生委員)**: Isolated elderly check-ins, sensor alerts, home visits.
+  - 🏡 **Citizen Satō (地域住民・起業家)**: Akiya acquisition, town attractiveness, civic transparency.
+- **Bilingual Interface**: Seamless, instant toggle between native Japanese (日本語) and English.
+
+---
+
+## 📐 System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           MACHIMIRAI FRONTEND                               │
+│      React 19  •  TypeScript 5.8  •  Vite 8.3  •  Leaflet GIS  •  Recharts  │
+├───────────────────┬───────────────────┬───────────────────┬─────────────────┤
+│ Demographic Dash  │ Smart Shrinkage   │ Fiscal Monitor    │ Akiya Manager   │
+│ • 101 Cohorts     │ • GIS Facilities  │ • 20-Yr Balance   │ • Hazard Matrix │
+│ • Age Pyramids    │ • What-If Sim     │ • Insolvency Cliff│ • Demolition ROI│
+├───────────────────┴───────────────────┴───────────────────┴─────────────────┤
+│ Elderly Network: IoT Telemetry Radar   │ Migration Toolkit: 7-Pillar Radar   │
+│ Persona Selector: Mayor/Planner/Welfare│ Bilingual Engine: 日本語 (JA) / EN  │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │  REST APIs / JSON (Axios + JWT)
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                     FASTAPI GOVTECH API GATEWAY                             │
+│                Python 3.11+  •  FastAPI 0.115+  •  Uvicorn                  │
+├───────────────────┬───────────────────┬───────────────────┬─────────────────┤
+│ NIPSSR Engine     │ GIS Optimizer     │ Fiscal Forecaster │ Akiya & IoT Svc │
+│ • Single-Yr Cohort│ • Haversine Dist  │ • Revenue Erosion │ • Multi-Hazard  │
+│ • MHLW Life Table │ • 30-Min Envelope │ • Subsidy Relief  │ • 24h Telemetry │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │  SQLAlchemy 2.0 ORM
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                             DATABASE LAYER                                  │
+│          SQLite (Zero-config Dev)  /  PostgreSQL (Enterprise Cloud)         │
+├─────────────────┬─────────────────┬─────────────────┬───────────────────────┤
+│ Municipalities  │ Facilities      │ Fiscal Records  │ Akiya & Seniors       │
+└─────────────────┴─────────────────┴─────────────────┴───────────────────────┘
+```
+
+---
+
+## 📸 Visual Showcase
+
+### 1. Demographic Intelligence Dashboard
+Real-time NIPSSR 101-cohort projection, interactive age-sex population pyramid, and municipal viability countdown timers for Minamiaso Village.
 
 ![Demographic Intelligence Dashboard](docs/images/01_demographic_intelligence.png)
 
 ---
 
-### 2. Smart Shrinkage & Facility Consolidation Simulator
-> *Interactive Leaflet GIS mapping of public infrastructure with dynamic what-if budget consolidation modeling, travel time impact, and emergency medical envelope preservation.*
+### 2. Smart Shrinkage & Facility Consolidation Planner
+Interactive Leaflet GIS mapping of public infrastructure with dynamic what-if consolidation modeling, student travel deltas, and 30-minute emergency medical envelope preservation.
 
 ![Smart Shrinkage GIS Simulator](docs/images/02_smart_shrinkage_gis.png)
 
 ---
 
 ### 3. 20-Year Fiscal Forecast & Fiscal Cliff Warning
-> *Dual-stream trajectory tracking revenue decline vs. surging social security expenditure, identifying the exact year of municipal insolvency.*
+Dual-stream trajectory tracking tax revenue collapse against escalating social security expenditure, identifying the exact year of municipal insolvency.
 
 ![Fiscal Sustainability Monitor](docs/images/03_fiscal_sustainability.png)
 
 ---
 
 ### 4. Akiya (Empty Houses) GIS & Hazard Management
-> *Multi-hazard risk scoring (structural collapse, wildfire, pests) under the Revised Akiya Act paired with budget-optimized demolition prioritization.*
+Multi-hazard risk scoring (structural collapse, wildfire, pests) under the Revised Akiya Act paired with budget-optimized demolition prioritization.
 
 ![Akiya Hazard Manager](docs/images/04_akiya_hazard_manager.png)
 
 ---
 
 ### 5. Elderly Welfare Network & 24-Hour IoT Radar
-> *Monitored isolated senior registry with real-time smart meter anomaly detection to prevent solitary deaths (孤独死).*
+Monitored isolated senior registry with real-time smart meter anomaly detection to prevent solitary deaths (*kodokushi* / 孤独死).
 
 ![Elderly Welfare Network](docs/images/05_elderly_welfare_network.png)
 
 ---
 
 ### 6. Migration Attraction Toolkit & Subsidy ROI
-> *7-pillar municipal attractiveness radar benchmarking and net present return solver for public relocation grants.*
+7-pillar municipal attractiveness radar benchmarking and net present return solver for public relocation grants.
 
 ![Migration Attraction Toolkit](docs/images/06_migration_toolkit.png)
 
 ---
 
 ### 7. Native Bilingual Japanese Interface (日本語対応)
-> *Instant, lossless toggle between English and Japanese civic terminology across all operational views.*
+Instant, lossless toggle between English and Japanese civic terminology across all operational views.
 
 ![Bilingual Japanese Interface](docs/images/07_bilingual_japanese_dashboard.png)
 
 ---
 
-## 🏛️ System Architecture
+## 💻 Core Code Highlights
 
-MachiMirai is architected with a decoupled microservice structure: an asynchronous **FastAPI** backend executing vectorized **NumPy** cohort simulations and geospatial distance computations, coupled with a **React 19 + TypeScript + Vite** client featuring an obsidian GovTech design system, **Leaflet GIS** maps, and reactive **Recharts** visualizations.
-
-### 📐 High-Level Component Blueprint
-
-```mermaid
-graph TB
-    subgraph Client ["Client Presentation Layer (React 19 + TypeScript + Vite)"]
-        UI_Nav["Persona Switcher (Mayor / Planner / Welfare / Citizen) & Bilingual Toggle (JA/EN)"]
-        UI_Demo["Demographic Intelligence (101-Cohort Pyramid, Countdown Solver, Micro-Districts)"]
-        UI_Shrink["Smart Shrinkage Planner (Interactive GIS Map, What-If Consolidation Engine)"]
-        UI_Fisc["Fiscal Monitor (20-Yr Balance Sheet, Insolvency Cliff Early Warning)"]
-        UI_Akiya["Akiya Manager (Hazard Scoring, AI Repurposing, Demolition Priority Matrix)"]
-        UI_Eld["Elderly Welfare Network (IoT Telemetry Radar, Smart Meter Sparks, Check-In Logger)"]
-        UI_Mig["Migration Toolkit (7-Pillar Radar, Revitalization Subsidy ROI Simulator)"]
-    end
-
-    subgraph API ["GovTech API Gateway (FastAPI / Asynchronous Router Mesh)"]
-        R_Auth["/api/auth (JWT Security & Persona RBAC)"]
-        R_Muni["/api/municipalities"]
-        R_Demo["/api/demographics"]
-        R_Shrink["/api/shrinkage"]
-        R_Fisc["/api/fiscal"]
-        R_Akiya["/api/akiya"]
-        R_Eld["/api/elderly"]
-        R_Mig["/api/migration"]
-    end
-
-    subgraph Engines ["Mathematical Modeling & Analytics Engines"]
-        CC_Engine["NIPSSR Cohort-Component Engine (101 Single-Year Cohorts, MHLW Life Tables)"]
-        GIS_Engine["Geospatial Consolidation Engine (Haversine Matrix & 30-min Travel Envelopes)"]
-        Fiscal_Engine["Local Tax Yield & Social Transfer Invariance Solver"]
-        Hazard_Engine["Akiya Multi-Hazard Matrix (Structural, Wildfire, Environmental Risk)"]
-        IoT_Engine["24-Hour Telemetry & Inactivity Anomaly Detector"]
-        ROI_Engine["Municipal Revitalization Incentive Yield Simulator"]
-    end
-
-    subgraph Storage ["Persistent Operational Data Store"]
-        DB[(SQLite / PostgreSQL via SQLAlchemy 2.0 ORM)]
-        SeedData[("Curated Municipal Baseline: Minamiaso, Gojome, Kamiyama, Yubari")]
-    end
-
-    Client <-->|REST / JSON / Bearer JWT| API
-    API --> Engines
-    Engines <--> Storage
-    Storage --- SeedData
-```
-
-### 🔄 Runtime Simulation Sequence Flow
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Mayor as Municipal Mayor / Urban Planner
-    participant WebUI as React 19 Frontend
-    participant API as FastAPI Gateway (/api/shrinkage)
-    participant Engine as Optimization Engine
-    participant DB as SQLAlchemy Store
-
-    Mayor->>WebUI: Toggles Facility Consolidation (e.g. Close Hakusu Elementary)
-    WebUI->>API: POST /api/shrinkage/simulate/{id} (selected_facility_ids)
-    API->>DB: Query active public facilities & student distribution
-    DB-->>API: Facility records & maintenance costs
-    API->>Engine: Run consolidation trade-off solver
-    Note over Engine: Calculates: 1. Annual Yen Savings<br/>2. Commute Time Delta (+4.2 min)<br/>3. Emergency Medical Envelope (95.4%)
-    Engine-->>API: Simulation metrics & compact city zonation
-    API-->>WebUI: 200 OK (Fiscal savings, Travel impact, Zonation delta)
-    WebUI-->>Mayor: Instant Reactive GIS Map re-render & KPI updates
-```
-
----
-
-## 🌟 Core Capabilities
-
-### 1. 📊 Demographic Intelligence Dashboard
-- **NIPSSR Cohort-Component Engine**: Simulates population dynamics across 101 single-year age cohorts ($0$ to $100+$) using MHLW Complete Life Tables, Age-Specific Fertility Rates (ASFR), and age-dependent rural net migration curves.
-- **Dynamic Population Pyramid**: Interactive visualization comparing 2026 baseline distributions against 2036, 2046, and 2056 forecasts with elderly/working/child dependency ratios.
-- **Municipal Survival Countdown**: Computes the exact calendar year when total population crosses critical municipal viability thresholds ($10{,}000$, $7{,}500$, $5{,}000$, $3{,}000$, $1{,}000$ residents).
-- **Sub-Municipal (町丁・字) Breakdown**: Granular micro-district telemetry tracking vital rates, depopulation velocity, and youth outflow rates.
-
-### 2. 🏗️ Smart Shrinkage Planner
-- **GIS Public Facility Inventory**: Comprehensive tracking of elementary schools, junior high schools, rural hospitals, clinics, community centers, water treatment plants, and bridges with structural age, replacement value, and annual maintenance overhead.
-- **What-If Scenario Simulator**: Quantifies annual municipal budget savings ($\yen$), changes in average student commute times, and healthcare coverage ratios when specific facilities are decommissioned or merged.
-- **Compact City Zonation**: Categorizes neighborhoods into *Maintain Core Services (維持)*, *Gradual Consolidation (統合)*, and *Retire & Rewild (集約・撤退)*.
-- **30-Minute Emergency Medical Envelope**: Geospatial boundary validation ensuring $\ge 95\%$ of remaining rural citizens retain emergency medical transport access within 30 minutes.
-
-### 3. 📉 Fiscal Sustainability Monitor
-- **20-Year Balance Sheet Forecast**: Dual-stream projection of tax revenue collapse (resident tax, fixed asset property tax, corporate inhabitant tax) vs. soaring social security and aged infrastructure maintenance.
-- **Fiscal Cliff Early Warning**: Identifies the exact projected year of municipal insolvency (*Financial Rehabilitation Designation* / 財政再生団体) up to 10 years in advance.
-- **Grant Dependency Index**: Tracks municipal reliance on National Treasury Allocations (*地方交付税交付金*) and ranks fiscal independence ratios (財政力指数) against national peer cohorts.
-
-### 4. 🏚️ Akiya (Empty House) Manager
-- **Geospatial Hazard Mapping**: Catalog of vacant and abandoned properties evaluated under Japan's **Revised Akiya Special Measures Act (改正空家等対策特別措置法)**.
-- **Composite Risk Scoring Matrix**: Algorithmic scoring combining structural collapse danger, wildfire hazard, and pest infestation vectors ($0-100$).
-- **AI-Guided Repurposing Engine**: Contextual recommendations: *Satellite Telework Office*, *Community Daycare / Cafe*, *Licensed Minpaku (民泊)*, or *Mandatory Municipal Demolition (代執行)*.
-- **Demolition Priority Matrix**: Optimizes annual municipal demolition expenditure against public safety risk and neighborhood revitalization impact.
-
-### 5. 🩺 Elderly Welfare Network
-- **Isolated Senior Registry**: Directory tracking single-occupant elderly citizens ($\ge 75$ years), mobility grades (A/B/C), chronic medical conditions, and emergency contacts.
-- **24-Hour IoT Inactivity Anomaly Radar**: Real-time monitoring of passive telemetry (smart water meter flow, electrical circuit load, infrared motion beacons) to prevent *kodokushi* (孤独死 - solitary death).
-- **Community Check-In Logger**: Field logging interface for welfare commissioners (民生委員), post office couriers, and volunteer patrols.
-
-### 6. 🚀 Migration Attraction Toolkit
-- **7-Pillar Attractiveness Radar**: Systematic benchmarking across *Natural Environment*, *Affordable Housing*, *Childcare Subsidies*, *Digital Infrastructure (Fiber/5G)*, *Healthcare Access*, *Local Employment*, and *Public Transit*.
-- **Revitalization Investment ROI Simulator**: Computes net return on public incentive funds (e.g. $\yen 50\text{M}$ young family relocation grant $\rightarrow$ projected children enrolled $\rightarrow$ 10-year municipal tax yield).
-- **National Success Case Repository**: Documented strategic playbooks from trailblazing towns (Kamiyama Tokushima fiber hub, Sabae Fukui open-data cluster, Ama-cho Shimane educational revival).
-
-### 7. 👥 Multi-Persona Governance & Full Bilingual Localization
-- **Instant Persona Switcher**: Tailors operational interfaces for four distinct civil stakeholders:
-  - 🏛️ **Mayor Tanaka (南阿蘇村 村長)**: Executive summary, fiscal solvency, consolidation trade-offs.
-  - 📊 **Officer Yamamoto (秋田県 企画官)**: Multi-town benchmarking, macro indicators, prefectural grants.
-  - 🩺 **Coordinator Suzuki (福祉課・民生委員)**: Micro-level elderly check-ins, sensor alerts, home visits.
-  - 🏡 **Citizen Satō (地域住民・起業家)**: Akiya acquisition, town attractiveness, civic transparency.
-- **Bilingual Interface**: Native Japanese (日本語) and professional English with instant, lossless toggle across all dashboard views.
-
----
-
-## 🧮 Demographic Forecasting Engine
-
-MachiMirai implements the standard demographic methodology established by the **National Institute of Population and Social Security Research (NIPSSR / 国立社会保障・人口問題研究所)**:
-
-$$\begin{aligned}
-P_{a+1, t+1}^{(s)} &= P_{a, t}^{(s)} \cdot S_{a}^{(s)} + M_{a}^{(s)} \\
-P_{0, t+1}^{(f)} &= \frac{100.0}{205.5} \sum_{a=15}^{49} P_{a, t}^{(f)} \cdot f_{a} \\
-P_{0, t+1}^{(m)} &= \frac{105.5}{205.5} \sum_{a=15}^{49} P_{a, t}^{(f)} \cdot f_{a}
-\end{aligned}$$
-
-Where:
-- $P_{a, t}^{(s)}$ represents population of sex $s \in \{m, f\}$ at exact age $a \in [0, 100]$ in calendar year $t$.
-- $S_{a}^{(s)}$ represents the cohort survival probability derived from the MHLW 23rd Complete Life Table.
-- $f_{a}$ is the Age-Specific Fertility Rate scaled to the municipality's Total Fertility Rate (TFR).
-- $M_{a}^{(s)}$ is the age-stratified net migration vector capturing the rural youth out-migration spike (ages 18–24).
-- Age $100+$ functions as an open-ended terminal accumulator.
-
----
-
-## 💻 Code Highlights
-
-### Vectorized Demographic Cohort Engine (`backend/app/demographic_engine.py`)
+### Vectorized NIPSSR Cohort Engine (`backend/app/demographic_engine.py`)
 
 ```python
 def run_cohort_component_projection(
@@ -316,7 +241,7 @@ def run_cohort_component_projection(
         # Aggregate dependency ratios and check municipal survival countdown...
 ```
 
-### Fiscal Cliff & Peer Benchmarking (`backend/app/routers/fiscal.py`)
+### Fiscal Cliff Early Warning Solver (`backend/app/routers/fiscal.py`)
 
 ```python
 @router.get("/forecast/{municipality_id}", response_model=FiscalForecastResponse)
@@ -348,25 +273,11 @@ def get_fiscal_forecast(municipality_id: str, db: Session = Depends(get_db)):
     )
 ```
 
-### Reactive Population Pyramid Formatting (`frontend/src/components/DemographicDashboard.tsx`)
-
-```tsx
-// Format pyramid data for Recharts horizontal paired bars (male negative, female positive)
-const pyramidChartData = (activePyramid || []).map((c: any) => ({
-  age: c.age_group,
-  male: -Math.abs(c.male),       // Mirrored left bar
-  female: c.female,              // Right bar
-  maleRaw: c.male,
-  femaleRaw: c.female,
-  total: c.total
-}));
-```
-
 ---
 
 ## 🗺️ Pre-Seeded Municipalities
 
-MachiMirai includes production-grade authentic seed datasets representing four distinct geographic and economic typologies in Japan:
+MachiMirai includes authentic production-grade seed data for four representative Japanese municipalities:
 
 | Municipality | Prefecture | Type | Pop (2026) | Peak Pop (Year) | Elderly Ratio | Fiscal Index | Grant Dep. | Primary Municipal Challenge |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---|
@@ -377,75 +288,11 @@ MachiMirai includes production-grade authentic seed datasets representing four d
 
 ---
 
-## 📡 API Reference
-
-All endpoints are served under `/api` and deliver structured JSON responses with standard HTTP error codes.
-
-### API Endpoint Directory
-
-```
-├── /api/auth
-│   ├── POST /login               # Authenticate credentials & return JWT Bearer token
-│   └── GET  /me                  # Profile & persona authorization attributes
-├── /api/municipalities
-│   ├── GET  /                    # List all managed municipalities
-│   └── GET  /{id}                # Detailed profile, topography, survival metrics
-├── /api/demographics
-│   ├── GET  /dashboard/{id}      # Complete demographic packet (pyramid, countdown, cohorts)
-│   ├── POST /simulate            # Custom what-if projection with TFR & migration overrides
-│   ├── GET  /neighborhoods/{id}  # Micro-district (町丁・字) demographic telemetry
-│   └── GET  /benchmarks          # Comparison against prefecture & national standards
-├── /api/shrinkage
-│   ├── GET  /facilities/{id}     # GIS inventory of schools, clinics, waterworks, bridges
-│   ├── POST /simulate/{id}       # Facility consolidation simulator (savings & commute times)
-│   ├── GET  /scenarios/{id}      # Pre-calculated municipal consolidation packages
-│   └── GET  /compact-city/{id}   # Maintain / Consolidate / Rewild zonation boundaries
-├── /api/fiscal
-│   └── GET  /forecast/{id}       # 20-year revenue vs expenditure & insolvency cliff year
-├── /api/akiya
-│   ├── GET  /{id}                # GIS empty house registry with multi-hazard scores
-│   ├── POST /{id}                # Register new vacant property inspection report
-│   └── POST /prioritize          # Demolition vs repurposing budget optimization solver
-├── /api/elderly
-│   ├── GET  /{id}                # Monitored isolated elderly registry
-│   ├── GET  /alerts/{id}         # 24-hour inactivity emergency alerts (kodokushi prevention)
-│   └── POST /checkin/{res_id}    # Field log submission by welfare commissioner (民生委員)
-└── /api/migration
-    ├── GET  /scorecard/{id}      # 7-pillar municipality attractiveness radar metrics
-    ├── POST /simulate-roi        # Incentive grant ROI solver (inflow vs tax revenue yield)
-    └── GET  /case-studies        # National best-practice case studies (Kamiyama, Sabae, Ama-cho)
-```
-
----
-
-## 🔒 Security, Privacy & RBAC Governance
-
-MachiMirai is engineered to satisfy the digital governance policies established by Japan's **Digital Agency (デジタル庁)** and the **Ministry of Internal Affairs and Communications (MIC / 総務省)**:
-
-### 1. Personal Information Protection (個人情報保護法)
-- **PII Pseudonymization**: Single-occupant elderly resident identities and exact parcel addresses are cryptographically hashed and masked in citizen and public planner views.
-- **Telemetry Scrambling**: Water meter and electrical load readings are aggregated to 1-hour epochs to prevent daily routine extraction by unauthorized parties.
-
-### 2. Role-Based Access Control (RBAC) Permission Matrix
-
-| Capability / Resource Tier | 🏛️ Mayor (村長) | 📊 Planner (企画官) | 🩺 Welfare (民生委員) | 🏡 Citizen (住民) |
-|:---|:---:|:---:|:---:|:---:|
-| **Demographic Projections & Pyramids** | Full | Full | View Only | View Only |
-| **Facility Consolidation Scenarios** | Full Execution | Model & Propose | View Only | Public Overview |
-| **Fiscal Balance Sheet & Insolvency** | Full Access | Full Access | Hidden | Public Summaries |
-| **Akiya Registry & Hazard Scores** | Full Access | Full Access | Safety View | Repurposing View |
-| **Akiya Mandatory Demolition (代執行)** | Authorized | Propose Only | No Access | No Access |
-| **Elderly Personal Health Registry** | Anonymized | Anonymized | Full PII Access | No Access |
-| **24-Hour Inactivity Emergency Telemetry** | High-Level Alerts | District Aggregates | Full Real-Time Feed | No Access |
-| **Migration Incentive Modeling** | Full Access | Full Access | View Only | View Only |
-
----
-
 ## ⚡ Quickstart Guide
 
 ### Prerequisites
-- **Node.js**: `v18.0.0` or higher ([Download Node.js](https://nodejs.org/))
-- **Python**: `v3.10` or higher ([Download Python](https://www.python.org/))
+- **Node.js**: `v18.0.0` or higher
+- **Python**: `v3.10` or higher
 - **Git**: `v2.30` or higher
 
 ### 1. Clone the Repository
@@ -454,176 +301,57 @@ git clone https://github.com/CharanTeja-16/MachiMirai.git
 cd MachiMirai
 ```
 
-### 2. Backend Initialization & Startup
+### 2. Backend Startup
 ```powershell
-# Navigate into backend directory
 cd backend
-
-# Create and activate virtual environment (recommended)
 python -m venv venv
 .\venv\Scripts\Activate.ps1       # Windows PowerShell
 # source venv/bin/activate        # macOS / Linux
-
-# Install required Python packages
 pip install -r requirements.txt
-
-# Start the ASGI development server (auto-creates and seeds SQLite database)
 python -m uvicorn app.main:app --reload --port 8000
 ```
-- 🌐 **Backend API Root**: `http://localhost:8000/`
-- 📑 **Interactive OpenAPI Swagger Docs**: `http://localhost:8000/docs`
-- 📖 **ReDoc Alternative Documentation**: `http://localhost:8000/redoc`
+- 🌐 **Backend Root**: `http://localhost:8000/`
+- 📑 **Swagger API Docs**: `http://localhost:8000/docs`
 
-### 3. Frontend Client Setup & Launch
-Open a second terminal:
+### 3. Frontend Startup
 ```powershell
-# Navigate into frontend directory
 cd frontend
-
-# Install Node dependencies
 npm install
-
-# Start Vite development server
 npm run dev
 ```
 - 💻 **Application URL**: `http://localhost:5173/`
 
-### 4. Monorepo Orchestration Scripts (Root Directory)
+### 4. Running Test Suites
 ```bash
-npm run dev:frontend    # Launches Vite frontend dev server
-npm run dev:backend     # Launches FastAPI uvicorn backend
-npm run build:frontend  # Validates TypeScript types and generates production bundle
-npm run test:backend    # Runs backend Pytest verification suite
+# Backend pytest suite (11 passing tests)
+cd backend && python -m pytest tests -v
+
+# Frontend TypeScript build validation
+cd frontend && npm run build
 ```
 
 ---
 
-## 🧪 Verification & Testing
+## 📡 API Specification
 
-Both frontend and backend include rigorous automated validation suites:
-
-```powershell
-# Execute Backend Pytest Suite (11 unit & integration tests)
-cd backend
-python -m pytest tests -v
-```
-
-```
-tests/test_api.py::test_health_check PASSED                              [  9%]
-tests/test_api.py::test_get_municipalities PASSED                        [ 18%]
-tests/test_api.py::test_demographic_dashboard PASSED                     [ 27%]
-tests/test_api.py::test_shrinkage_facilities_and_simulation PASSED       [ 36%]
-tests/test_api.py::test_fiscal_forecast PASSED                           [ 45%]
-tests/test_api.py::test_elderly_alerts_and_checkin PASSED                [ 54%]
-tests/test_api.py::test_migration_simulation PASSED                      [ 63%]
-tests/test_demographics.py::test_survival_rates PASSED                   [ 72%]
-tests/test_demographics.py::test_initial_pyramid_synthesis PASSED        [ 81%]
-tests/test_demographics.py::test_cohort_component_projection_decline PASSED [ 90%]
-tests/test_demographics.py::test_demographic_countdown PASSED            [100%]
-============================= 11 passed in 5.29s ==============================
-```
-
-```powershell
-# Execute Frontend TypeScript Compilation & Production Bundle
-cd frontend
-npm run build
-```
-
-```
-vite v8.3.0 building client environment for production...
-✓ 2462 modules transformed.
-dist/index.html                   1.62 kB │ gzip:   0.89 kB
-dist/assets/index-B7cB7-eu.css    4.33 kB │ gzip:   1.56 kB
-dist/assets/index-CDy6jWd8.js   915.97 kB │ gzip: 265.88 kB
-✓ built in 12.60s
-```
-
----
-
-## 📂 Repository Structure
-
-```text
-MachiMirai/
-├── backend/                             # Python FastAPI Microservice
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── database.py                  # SQLAlchemy engine & session factory
-│   │   ├── demographic_engine.py        # NIPSSR single-year cohort mathematical engine
-│   │   ├── main.py                      # FastAPI app initialization, lifespan & CORS
-│   │   ├── models.py                    # Relational ORM models (Municipalities, Facilities, Akiya)
-│   │   ├── schemas.py                   # Pydantic validation schemas & API contracts
-│   │   ├── seed.py                      # Production municipal seeder (4 authentic towns)
-│   │   └── routers/                     # Modular domain-driven REST API endpoints
-│   │       ├── akiya.py                 # Vacant house hazard scoring & reuse optimizer
-│   │       ├── auth.py                  # JWT authentication & persona RBAC
-│   │       ├── demographics.py          # Cohort projection & countdown solvers
-│   │       ├── elderly.py               # IoT telemetry & isolated senior monitoring
-│   │       ├── fiscal.py                # Revenue/expenditure & insolvency cliff early warning
-│   │       ├── migration.py             # 7-factor radar & subsidy ROI simulator
-│   │       ├── municipalities.py        # Municipal profile queries & survival scores
-│   │       └── shrinkage.py             # Facility inventory & consolidation scenario solver
-│   ├── tests/                           # Pytest automated test harness
-│   │   ├── test_api.py                  # API endpoint integration tests
-│   │   └── test_demographics.py         # Cohort-component mathematical tests
-│   ├── machimirai.db                    # SQLite persistent store
-│   └── requirements.txt                 # Backend Python package manifest
-│
-├── frontend/                            # React 19 + TypeScript + Vite Client
-│   ├── public/                          # Static branding & vector icons
-│   ├── src/
-│   │   ├── components/                  # Domain-specific UI modules
-│   │   │   ├── AkiyaManager.tsx         # Empty house GIS mapping & hazard prioritization
-│   │   │   ├── DemographicDashboard.tsx # Population pyramids & cohort countdowns
-│   │   │   ├── ElderlyNetwork.tsx       # 24hr anomaly telemetry & check-in log
-│   │   │   ├── FiscalMonitor.tsx        # 20-year balance sheet & insolvency cliff
-│   │   │   ├── MigrationToolkit.tsx     # 7-factor radar & subsidy ROI simulator
-│   │   │   ├── Navbar.tsx               # Header with persona switcher & language toggle
-│   │   │   ├── ShrinkagePlanner.tsx     # Facility consolidation scenario builder & GIS map
-│   │   │   └── Sidebar.tsx              # Application domain navigation
-│   │   ├── api.ts                       # Typed REST client with error handling
-│   │   ├── i18n.ts                      # Bilingual (JA / EN) translation dictionary
-│   │   ├── index.css                    # GovTech Obsidian design system
-│   │   ├── App.tsx                      # Root component & state coordinator
-│   │   └── main.tsx                     # React DOM entry point
-│   ├── package.json                     # Frontend package manifest
-│   ├── tsconfig.json                    # TypeScript compiler configuration
-│   └── vite.config.ts                   # Vite build configuration
-│
-├── docs/                                # Project documentation assets
-│   └── images/                          # High-resolution live application screenshots
-│       ├── 01_demographic_intelligence.png
-│       ├── 02_smart_shrinkage_gis.png
-│       ├── 03_fiscal_sustainability.png
-│       ├── 04_akiya_hazard_manager.png
-│       ├── 05_elderly_welfare_network.png
-│       ├── 06_migration_toolkit.png
-│       └── 07_bilingual_japanese_dashboard.png
-│
-├── MachiMirai.md                        # Authoritative Project Specification Document
-├── package.json                         # Root monorepo orchestration scripts
-├── LICENSE                              # MIT License
-├── .gitignore                           # Git exclusions (caches, binaries, dist)
-└── README.md                            # Comprehensive enterprise project documentation
-```
-
----
-
-## 🗺️ Product Roadmap
-
-- [x] **v1.0.0 (Current Release)**
-  - NIPSSR 101-cohort component demographic engine.
-  - Interactive GIS facility consolidation scenario simulator.
-  - 20-year municipal fiscal sustainability & insolvency cliff detector.
-  - Akiya hazard scoring & repurposing optimization under the Revised Akiya Act.
-  - 24-hour IoT inactivity anomaly radar for isolated elderly protection.
-  - Migration attraction radar & public subsidy ROI solver.
-  - Multi-persona role-based access control and instant bilingual JA/EN toggle.
-- [ ] **v1.1.0 (Q3 2026)**
-  - **Project PLATEAU (MLIT / 国土交通省)**: 3D CityGML digital twin integration for compact city zonation visualization.
-- [ ] **v1.2.0 (Q4 2026)**
-  - **Multi-Spectral Satellite AI**: Automated detection of unrecorded rural akiya roof structural failure using Sentinel-2 and ALOS imagery.
-- [ ] **v2.0.0 (2027)**
-  - **Automated MIC Grant Submission**: One-click generation of Ministry of Internal Affairs Regional Revitalization Subsidy application forms (地方創生推進交付金申請書).
+| Method | Endpoint | Description |
+|:---|:---|:---|
+| `GET` | `/api/health` | Service health status and database connectivity check |
+| `GET` | `/api/municipalities` | List all tracked municipalities with demographic summaries |
+| `GET` | `/api/municipalities/{id}` | Detailed municipality profile including peak population and survival score |
+| `GET` | `/api/demographics/dashboard/{id}` | Complete demographic package: 30-yr projection, pyramid, countdown |
+| `POST` | `/api/demographics/simulate` | Custom what-if projection with variable TFR and migration overrides |
+| `GET` | `/api/shrinkage/facilities/{id}` | GIS inventory of schools, clinics, and water treatment plants |
+| `POST` | `/api/shrinkage/simulate/{id}` | Facility consolidation simulator modeling $\yen$ savings and commute changes |
+| `GET` | `/api/shrinkage/compact-city/{id}` | Compact city boundaries: Maintain, Consolidate, and Rewild zones |
+| `GET` | `/api/fiscal/forecast/{id}` | 20-year revenue vs expenditure trajectory and insolvency cliff forecast |
+| `GET` | `/api/akiya/{id}` | GIS list of vacant properties with multi-hazard risk scoring |
+| `POST` | `/api/akiya/prioritize` | Budget-optimized demolition and repurposing decision solver |
+| `GET` | `/api/elderly/{id}` | Registry of monitored single-occupant elderly citizens |
+| `GET` | `/api/elderly/alerts/{id}` | Active 24-hour inactivity emergency alerts (*kodokushi* prevention) |
+| `POST` | `/api/elderly/checkin/{res_id}` | Log physical or telephone check-in by welfare commissioner |
+| `GET` | `/api/migration/scorecard/{id}` | 7-pillar municipality attractiveness radar scores |
+| `POST` | `/api/migration/simulate-roi` | Revitalization incentive ROI solver (inflow vs tax revenue yield) |
 
 ---
 

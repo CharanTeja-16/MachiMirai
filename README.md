@@ -25,7 +25,13 @@
   <i>Empowering mayors, urban planners, and welfare commissioners with algorithmic "smart shrinkage" (スマート・シュリンク), infrastructure consolidation modeling, fiscal cliff early warnings, akiya hazard mitigation, and IoT-driven isolated elderly safety networks.</i>
 </p>
 
-[Key Capabilities](#-core-capabilities) • [System Architecture](#-system-architecture) • [Mathematical Models](#-demographic-forecasting-engine) • [Code Highlights](#-code-highlights) • [Municipal Data](#-pre-seeded-municipalities) • [REST API](#-api-reference) • [Quickstart](#-quickstart-guide) • [Security & RBAC](#-security-privacy--rbac-governance)
+<br />
+
+![MachiMirai Platform Overview](docs/images/01_demographic_intelligence.png)
+
+<br />
+
+[Live Interface Showcase](#-live-application-showcase) • [Key Capabilities](#-core-capabilities) • [System Architecture](#-system-architecture) • [Mathematical Models](#-demographic-forecasting-engine) • [Code Highlights](#-code-highlights) • [Municipal Data](#-pre-seeded-municipalities) • [REST API](#-api-reference) • [Quickstart](#-quickstart-guide) • [Security & RBAC](#-security-privacy--rbac-governance)
 
 ---
 
@@ -68,6 +74,59 @@ Over **30%** of Japan's population is 65 or older, and more than **477 municipal
 ```
 
 **MachiMirai (まちミライ)** directly addresses this operational void. Aligned with Japan's **Digital Garden City Nation Initiative (デジタル田園都市国家構想)**, **Society 5.0**, and **Regional Revitalization 2.0 (地方創生2.0)**, MachiMirai transforms disparate demographic, geospatial, fiscal, and welfare data silos into an actionable civic command center.
+
+---
+
+## 📸 Live Application Showcase
+
+All images below are live screenshots captured directly from the running MachiMirai application runtime.
+
+### 1. Demographic Intelligence & NIPSSR Cohort Model
+> *Real-time cohort simulation across 101 single-year age cohorts, comparative 2026–2056 population pyramids, and municipal viability countdown timers.*
+
+![Demographic Intelligence Dashboard](docs/images/01_demographic_intelligence.png)
+
+---
+
+### 2. Smart Shrinkage & Facility Consolidation Simulator
+> *Interactive Leaflet GIS mapping of public infrastructure with dynamic what-if budget consolidation modeling, travel time impact, and emergency medical envelope preservation.*
+
+![Smart Shrinkage GIS Simulator](docs/images/02_smart_shrinkage_gis.png)
+
+---
+
+### 3. 20-Year Fiscal Forecast & Fiscal Cliff Warning
+> *Dual-stream trajectory tracking revenue decline vs. surging social security expenditure, identifying the exact year of municipal insolvency.*
+
+![Fiscal Sustainability Monitor](docs/images/03_fiscal_sustainability.png)
+
+---
+
+### 4. Akiya (Empty Houses) GIS & Hazard Management
+> *Multi-hazard risk scoring (structural collapse, wildfire, pests) under the Revised Akiya Act paired with budget-optimized demolition prioritization.*
+
+![Akiya Hazard Manager](docs/images/04_akiya_hazard_manager.png)
+
+---
+
+### 5. Elderly Welfare Network & 24-Hour IoT Radar
+> *Monitored isolated senior registry with real-time smart meter anomaly detection to prevent solitary deaths (孤独死).*
+
+![Elderly Welfare Network](docs/images/05_elderly_welfare_network.png)
+
+---
+
+### 6. Migration Attraction Toolkit & Subsidy ROI
+> *7-pillar municipal attractiveness radar benchmarking and net present return solver for public relocation grants.*
+
+![Migration Attraction Toolkit](docs/images/06_migration_toolkit.png)
+
+---
+
+### 7. Native Bilingual Japanese Interface (日本語対応)
+> *Instant, lossless toggle between English and Japanese civic terminology across all operational views.*
+
+![Bilingual Japanese Interface](docs/images/07_bilingual_japanese_dashboard.png)
 
 ---
 
@@ -529,6 +588,16 @@ MachiMirai/
 │   ├── package.json                     # Frontend package manifest
 │   ├── tsconfig.json                    # TypeScript compiler configuration
 │   └── vite.config.ts                   # Vite build configuration
+│
+├── docs/                                # Project documentation assets
+│   └── images/                          # High-resolution live application screenshots
+│       ├── 01_demographic_intelligence.png
+│       ├── 02_smart_shrinkage_gis.png
+│       ├── 03_fiscal_sustainability.png
+│       ├── 04_akiya_hazard_manager.png
+│       ├── 05_elderly_welfare_network.png
+│       ├── 06_migration_toolkit.png
+│       └── 07_bilingual_japanese_dashboard.png
 │
 ├── MachiMirai.md                        # Authoritative Project Specification Document
 ├── package.json                         # Root monorepo orchestration scripts
